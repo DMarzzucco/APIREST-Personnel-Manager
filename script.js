@@ -4,7 +4,7 @@ const image =[
     'img/imag-2.jpg'
 ]
 // estado
-let indice =0;
+let index =0;
 const max=image.length;
 //interactuacion
 const containerElement =document.querySelector('.container');
@@ -14,12 +14,12 @@ const nextSlideButton= document.querySelector('.nextSlide');
 prevslideButton.addEventListener('click', function(){
     index--;
     setImageIndex();
-    changeImage(images[index], containerElement);    
+    changeImage(image[index], containerElement);    
 })
 nextSlideButton.addEventListener('click', function(){
     index++;
     setImageIndex();
-    changeImage(images[index], containerElement);    
+    changeImage(image[index], containerElement);    
 })
 
 function setImageIndex(){

@@ -1,7 +1,7 @@
 //defenir imganes 
 const image =[
-    'imag 1.jpg',
-    'imag 2.jpg'
+    'img/imag-1.jpg',
+    'img/imag-2.jpg'
 ]
 // estado
 let indice =0;

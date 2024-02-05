@@ -1,8 +1,33 @@
+import { useState } from 'react';
 import './App.scss'
 
+const imagePaths = [
+    'img/eg1.jpg',
+    'img/eg2.jpg',
+];
+console.log (imagePaths);
 function App() {
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const changeImage = (index) => {
+        setCurrentIndex(index);
+    };
+
+    const prevSlide = () => {
+        const index = (currentIndex - 1 + imagePaths.length) % imagePaths.length;
+        changeImage(index);
+    };
+
+    const nextSlide = () => {
+        const index = (currentIndex + 1) % imagePaths.length;
+        changeImage(index);
+    };
+
+
     return (
         <main className="container">
+            {/* header */}
             <header className="header">
                 <a href="#" className="logo">
                     <i className="fa-solid fa-car"></i> <span>AutoMotris</span>
@@ -29,8 +54,8 @@ function App() {
             </header>
             {/* article */}
             <article className="content">
-                <a className="slideButton prevSlide"><i className="fa-solid fa-chevron-left"></i></a>
-                <a className="slideButton nextSlide"><i className="fa-solid fa-chevron-right"></i></a>
+                <a className="slideButton prevSlide" onClick={prevSlide}><i className="fa-solid fa-chevron-left"></i></a>
+                <a className="slideButton nextSlide" onClick={nextSlide}><i className="fa-solid fa-chevron-right"></i></a>
                 <div className="contentMark">
                     <h1 className="content_clain">Your Car Repairs</h1>
                     <h2 className="content_subclain">Visit us for your service</h2>
@@ -56,6 +81,6 @@ function App() {
 
 
     );
-}
+};
 
 export default App;

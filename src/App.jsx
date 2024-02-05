@@ -1,23 +1,46 @@
 import { useState } from 'react';
 import './App.scss'
+import Footer from './components/footer';
+import Head from './components/Header';
 
 const imagePaths = [
     'img/eg1.jpg',
     'img/eg2.jpg',
 ];
-console.log (imagePaths);
 function App() {
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const changeImage = (index) => {
         setCurrentIndex(index);
+        const containerElement = document.querySelector('.container');
+        // cambiar background<->iterar con la hoja de estilos. 
+        containerElement.style.backgroundImage = `url(${imagePaths[index]})`;
+        // Cambiar color de fuente basado en el índice
+        const contentMarkElement = document.querySelector('.contentMark');
+        const textColor = index === 1 ? 'black' : 'white';
+        contentMarkElement.style.color = textColor;
+        // enlacesColor
+        const menuLinks = document.querySelectorAll('.menu-list_item a');
+        const linkColor = index === 1 ? 'black' : 'white';
+        menuLinks.forEach(link => {
+            link.style.color = linkColor;
+        });
+        // logoColor
+        const logoLink = document.querySelector('.logo');
+        logoLink.style.color = linkColor;
+        // slideButtonsColor
+        const slideButtons = document.querySelectorAll('.slideButton');
+        slideButtons.forEach(button => {
+            button.style.color = linkColor;
+        });
     };
-
+    // boton previo
     const prevSlide = () => {
         const index = (currentIndex - 1 + imagePaths.length) % imagePaths.length;
         changeImage(index);
     };
+    // boton previo
 
     const nextSlide = () => {
         const index = (currentIndex + 1) % imagePaths.length;
@@ -28,30 +51,7 @@ function App() {
     return (
         <main className="container">
             {/* header */}
-            <header className="header">
-                <a href="#" className="logo">
-                    <i className="fa-solid fa-car"></i> <span>AutoMotris</span>
-                </a>
-                <nav className="menu">
-                    <ul className="menu-list">
-                        <li className="menu-list_item" style={{ display: 'inline-block' }}>
-                            <a href="#">Home</a>
-                        </li>
-                        <li className="menu-list_item" style={{ display: 'inline-block' }}>
-                            <a href="#">Features</a>
-                        </li>
-                        <li className="menu-list_item" style={{ display: 'inline-block' }}>
-                            <a href="#">Price</a>
-                        </li>
-                        <li className="menu-list_item" style={{ display: 'inline-block' }}>
-                            <a href="#">Contact</a>
-                        </li>
-                        <li className="menu-list_item" style={{ display: 'inline-block' }}>
-                            <a href="#" className="book-apointment">Book Apointment</a>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+            <Head/>
             {/* article */}
             <article className="content">
                 <a className="slideButton prevSlide" onClick={prevSlide}><i className="fa-solid fa-chevron-left"></i></a>
@@ -63,20 +63,7 @@ function App() {
                 </div>
             </article>
             {/* footer */}
-            <footer className="footer">
-                <section className="footer-widget">
-                    <h3 className="footer_widget_title">Our Location</h3>
-                    <p className="footer-widget_text">15 Street Suburb Country 6000</p>
-                </section>
-                <section className="footer-widget">
-                    <h3 className="footer_widget_title">Phone</h3>
-                    <p className="footer-widget_text">+54 9 3462 5689-58</p>
-                </section>
-                <section className="footer-widget">
-                    <h3 className="footer_widget_title">Emial</h3>
-                    <p className="footer-widget_text">drrkermazyxokv@gmail.com</p>
-                </section>
-            </footer>
+            <Footer/>
         </main>
 
 

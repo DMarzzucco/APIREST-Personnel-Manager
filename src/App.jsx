@@ -2,22 +2,6 @@ import './App.scss'
 
 function App() {
     return (
-        // <article classNameName='ts'>
-        //     <header>
-        //         <div classNameName='img'></div>
-        //         <div classNameName='cont'>
-        //             <strong>Nombre</strong>
-        //             <span style={{ color: 'grey' }}>cuenta</span>
-        //         </div>
-        //     </header>
-        //     <aside style={{
-        //         padding: '9px 9px'
-        //     }}>
-        //         <button classNameName='bt'>
-        //             Seguir
-        //         </button>
-        //     </aside>
-        // </article>
         <main className="container">
             <header className="header">
                 <a href="#" className="logo">

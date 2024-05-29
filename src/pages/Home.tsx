@@ -26,7 +26,7 @@ function Home() {
             //   contentMarkElement.style.color = textColor;
             // }
             // change path-color
-            const MenuLink: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('.menu-list_item a');
+            const MenuLink: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('.header a');
             const linkColor: string = index === 1 ? 'black' : 'white';
             MenuLink.forEach(link => {
                 link.style.color = linkColor;

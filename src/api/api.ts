@@ -1,10 +1,4 @@
-interface NewMessage {
-  text: string;
-}
-interface MessageRespones {
-  id: number;
-  text: string;
-}
+import { MessageRespones, NewMessage } from "../Interfaces/TypeAndInterfaces";
 
 export const getMessages = (): Promise<MessageRespones[]> => {
   return fetch('http://localhost:3000/api/message')
@@ -16,17 +10,19 @@ export const getMessages = (): Promise<MessageRespones[]> => {
     });
 };
 
-export const postMessages = (message: NewMessage): Promise<string> => {
+export const postMessages = (message: NewMessage): Promise<MessageRespones> => {
   return fetch('http://localhost:3000/api/message', {
     method: 'POST',
     headers: {
       'Content-Type': 'aplication/json',
-    }, body: JSON.stringify({ message: message }),
+    },
+    credentials: "include",
+    body: JSON.stringify({ message: message }),
   }).then(response => {
     if (!response.ok) {
       throw new Error('Network not work');
     }
-    return response.text();
+    return response.json();
   });
 };
 

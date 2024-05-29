@@ -1,11 +1,12 @@
 import React from "react"
-import '../App.scss'
+import { Link } from "react-router-dom";
+// import '../App.scss'
 const Header: React.FC = () => {
     return (
         <header className="header">
-            <a href="#" className="logo">
+            <Link to={"/"} className="logo">
                 <i className="fa-solid fa-car"></i> <span>AutoMotris</span>
-            </a>
+            </Link>
             <nav className="menu">
                 <ul className="menu-list">
                     <li className="menu-list_item" style={{ display: 'inline-block' }}>

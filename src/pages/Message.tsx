@@ -1,13 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { getMessages, postMessages } from "../api/api";
 import { MessageRespones, NewMessage } from "../Interfaces/TypeAndInterfaces";
-import { MessageAck } from "whatsapp-web.js";
-/*
-export interface MessageRespones {
-    id: number;
-    text: string;
-}
- */
 
 function Message() {
     const [messages, setMessages] = useState<MessageRespones[]>([]);

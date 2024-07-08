@@ -1,4 +1,4 @@
-import { MessageRespones, NewMessage } from "../Interfaces/TypeAndInterfaces";
+import { MessageRespones, NewMessage } from "../Interfaces/Interfaces";
 
 export const getMessages = (): Promise<MessageRespones[]> => {
   return fetch('http://localhost:3000/api/message')

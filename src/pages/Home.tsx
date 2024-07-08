@@ -61,7 +61,6 @@ function Home() {
                         <h1 className="content_clain">Your Car Repairs</h1>
                         <h2 className="content_subclain">Visit us for your service</h2>
                     </div>
-                    {/* <a href="#" className="book-apointment">Book Apointment</a> */}
                     <Link to={'/messages'} className="book-apointment">Book Apointment</Link>
                 </div>
             </article>

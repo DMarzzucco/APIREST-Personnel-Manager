@@ -15,36 +15,36 @@ const AuthProvider: React.FC<AuthProvProps> = ({ children }) => {
 
     const [currentIndex, setCurrentIndex] = useState<number>(0)
 
-    const changeImage = (index: number): void => {
-        setCurrentIndex(index);
-        const containerElemen: HTMLElement | null = document.querySelector('.container');
-        if (containerElemen) {
-            // change background
-            containerElemen.style.backgroundImage = `url(${imagePath[index]})`;
-            // change font-color
-            const contentMarkElement: NodeListOf<HTMLElement> = document.querySelectorAll('.contHeader');
-            const textColor: string = index === 1 ? 'black' : 'white';
-            contentMarkElement.forEach(Link => {
-                Link.style.color = textColor;
-            })
-            // change path-color
-            const MenuLink: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('.header a');
-            const linkColor: string = index === 1 ? 'black' : 'white';
-            MenuLink.forEach(link => {
-                link.style.color = linkColor;
-            })
-            // change logo color
-            const logoLink: HTMLElement | null = document.querySelector('.logo');
-            if (logoLink) {
-                logoLink.style.color = linkColor;
+    const changeElementColor = (selector: string, color: string, singleElement: boolean = false): void => {
+        if (singleElement) {
+            const element: HTMLElement | null = document.querySelector(selector)
+            if (element) {
+                element.style.color = color
             }
-            // change button color
-            const slideButton: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('.slideButton');
-            slideButton.forEach(button => {
-                button.style.color = linkColor;
-            })
+        }
+        const elements: NodeListOf<HTMLElement> = document.querySelectorAll(selector);
+        elements.forEach(elem => {
+            elem.style.color = color
+        })
+    }
+
+    const changeImage = (index: number): void => {
+        setCurrentIndex(index)
+        const containerElement: HTMLElement | null = document.querySelector('.container')
+        if (containerElement) {
+            // change background
+            containerElement.style.backgroundImage = `url(${imagePath[index]})`;
+            // change font-color
+            const textColor: string = index === 1 ? 'black' : 'white';
+            const linkColor: string = textColor;
+
+            changeElementColor('.contHeader', textColor)
+            changeElementColor('.header a', linkColor)
+            changeElementColor('.logo', linkColor, true)
+            changeElementColor('.slideButton', linkColor)
         }
     }
+
     const slide = (op: "prev" | "next") => {
         setCurrentIndex(prev => {
             const index = op === "prev" ?

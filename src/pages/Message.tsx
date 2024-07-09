@@ -1,48 +1,21 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { getMessages, postMessages } from "../api/api";
-import { MessageRespones, NewMessage } from "../Interfaces/Interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import { decrement, increment, reset } from "../features/counter/counterSlice";
 
 function Message() {
-    const [messages, setMessages] = useState<MessageRespones[]>([]);
-    const [newMessage, setNewMessage] = useState<string>('');
-
-    useEffect(() => {
-        getMessages()
-            .then((data: MessageRespones[]) => setMessages(data))
-            .catch((error: Error) => console.error('Erro fetching messages', error))
-    }, []);
-    const handInput = (e: ChangeEvent<HTMLInputElement>) => { setNewMessage(e.target.value) }
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (newMessage) {
-            const messageSending: NewMessage = { text: newMessage }
-            postMessages(messageSending)
-                .then((response: MessageRespones) => {
-                    setMessages((currentMessages) => [...currentMessages, response]);
-                    setNewMessage('');
-                })
-                .catch((error: Error) => console.error('error posting message', error));
-        }
-    }
-
+    const count = useSelector((state: RootState) => state.counter.value)
+    const dispatch = useDispatch()
     return (
         <>
-            <section className="Ms">
-                <h1>Messages</h1>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Write your text over here"
-                        value={newMessage}
-                        onChange={handInput} />
-                    <button type="submit"> Send</button>
-                </form>
-                <ul>
-                    {messages.map((message) => (
-                        <li key={message.id}>{message.text}</li>
-                    ))}
-                </ul>
+            <section className="h-screen text-white flex flex-col justify-center items-center">
+                <div className=" border border-slate-300 p-2 rounded-full text-xl flex flex-row justify-center items-center">
+                    <button onClick={() => dispatch(increment())}>+</button>
+                    <span className="mx-2">{count}</span>
+                    <button onClick={() => dispatch(decrement())}>-</button>
+                </div>
+                <div>
+                    <button onClick={() => dispatch(reset())}>Reset</button>
+                </div>
             </section>
         </>
     )

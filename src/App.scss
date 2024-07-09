@@ -1,25 +1,26 @@
+
 /*container*/
 .container {
     height: 100vh;
     background: url(/public/img/eg1.jpg);
     background-position: center;
     background-size: cover;
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     width: auto;
 
     /*header*/
     .header {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: space-between;
+        // align-items: center;
         background: transparent;
 
         .logo {
-            display: flex;
-            align-items: center;
+            // display: flex;
+            // align-items: center;
             font-size: 38px;
             font-weight: bold;
             margin-left: 10px;
@@ -58,11 +59,11 @@
 /*Content */
 .content {
     width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    // flex: 1;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: flex-start;
     position: relative;
     color: white;
 
@@ -120,8 +121,8 @@
 /*footer*/
 .footer {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
     background-color: black;
     color: white;
 

@@ -1,60 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { addTask, editTask } from "../../features/tasks/tasksSlice";
-import { RootState } from "../../app/store";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/context";
 
-interface taskPropet {
-    title: string;
-    description: string;
-    completed: boolean;
-}
-const task: Omit<taskPropet, 'completed'> = {
-    title: "",
-    description: "",
-}
-// imporrtar constante y interfaz
 function Message() {
-    const [newTask, setNewTask] = useState<Omit<taskPropet, 'completed'>>(task)
+    const { handleChange, newTask, handleSubmit, RefreshPage } = useAuth()
 
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setNewTask(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }))
-    }
-    const dispatch = useDispatch();
-    const selector = useSelector((state: RootState) => state.tasks);
-    const nav = useNavigate();
-    const params = useParams<{ id: string }>();
-
-    const handlSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        if (params.id) {
-            const update = {
-                ...newTask,
-                id: Number(params.id),
-                completed: false
-            }
-            dispatch(editTask(update))
-        } else {
-            dispatch(addTask({
-                ...newTask,
-                completed: false
-            }))
-            console.log(newTask)
-            setNewTask(task)
-        }
-        nav('/lists')
-    }
-    useEffect(() => {
-        if (params.id) {
-            const task = selector.tasks.find(task => task.id === Number(params.id))
-            if (task) {
-                setNewTask({ title: task.title, description: task.description })
-            }
-        }
-    }, [])
+    useEffect(() => { RefreshPage() }, [])
     return (
         <section className="h-screen text-slate-300 flex flex-col justify-center items-center">
             <div className=" p-2  text-xl flex flex-col justify-center items-center">
@@ -62,7 +13,7 @@ function Message() {
                 <Link to={"/lists"}> Tasks List</Link>
             </div>
             <form
-                onSubmit={handlSubmit}
+                onSubmit={handleSubmit}
                 className="flex flex-col justify-center items-center">
                 <input
                     name="title"

@@ -1,27 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface taskProps {
-    id: number;
-    title: string;
-    description: string;
-    completed: boolean
-}
-interface tasksTyp {
-    tasks: taskProps[]
-    nexId: number
-}
-
-export const initialTask: tasksTyp = {
-    tasks: [
-        {
-            id: 0,
-            title: "nene",
-            description: "wuwuw",
-            completed: false
-        }
-    ],
-    nexId: 1
-}
+import { taskProps } from "../../Interfaces/Interfaces";
+import { initialTask } from "../../components";
 
 export const taskSlice = createSlice({
     name: "tasks",

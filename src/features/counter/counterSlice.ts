@@ -1,18 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
-// importar interfas
-export interface CounterState {
-    value: number
-}
-// exportar a funciones
-const initialState: CounterState = {
-    value: 0
-}
+import { initialCounter } from "../../components";
 
 export const counterSlice = createSlice({
     name: "counter",
-    initialState,
+    initialState:initialCounter,
     reducers: {
         increment: (state) => {
             state.value += 1

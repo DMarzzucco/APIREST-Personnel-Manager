@@ -1,6 +1,10 @@
 import { createContext, useContext, useState } from "react";
-import { AuthProvProps, ContextProp } from "../Interfaces/Interfaces";
-import { imagePath } from "../components/func/func";
+import { AuthProvProps, ContextProp, taskPropet } from "../Interfaces/Interfaces";
+import { imagePath, task } from "../components/func/func";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import { addTask, editTask } from "../features/tasks/tasksSlice";
 
 export const AuthContext = createContext<ContextProp | undefined>(undefined)
 
@@ -12,8 +16,45 @@ export const useAuth = () => {
     return context
 }
 const AuthProvider: React.FC<AuthProvProps> = ({ children }) => {
-
+    const [newTask, setNewTask] = useState<Omit<taskPropet, 'completed'>>(task)
     const [currentIndex, setCurrentIndex] = useState<number>(0)
+
+    const dispatch = useDispatch();
+    const selector = useSelector((state: RootState) => state.tasks);
+    const nav = useNavigate();
+    const params = useParams<{ id: string }>();
+
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        setNewTask(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }))
+    }
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (params.id) {
+            const update = {
+                ...newTask,
+                id: Number(params.id),
+                completed: false
+            }
+            dispatch(editTask(update))
+        };
+        dispatch(addTask({
+            ...newTask,
+            completed: false
+        }))
+        setNewTask(task)
+        nav("/lists")
+    }
+    const RefreshPage = () => {
+        if (params.id) {
+            const task = selector.tasks.find(task => task.id === Number(params.id))
+            if (task) {
+                setNewTask({ title: task.title, description: task.description })
+            }
+        }
+    }
 
     const changeElementColor = (selector: string, color: string, singleElement: boolean = false): void => {
         if (singleElement) {
@@ -55,7 +96,7 @@ const AuthProvider: React.FC<AuthProvProps> = ({ children }) => {
         })
     }
     return (
-        <AuthContext.Provider value={{ Slide: slide, currentIndex }}>
+        <AuthContext.Provider value={{ Slide: slide, currentIndex, newTask, handleChange, handleSubmit, RefreshPage }}>
             {children}
         </AuthContext.Provider>
     )

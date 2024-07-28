@@ -1,7 +1,7 @@
 import '../App.scss'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/context';
-import { BtnImage } from '../components/assets/assetst';
+import { BtnImage } from '../components';
 
 function Home() {
     const { Slide } = useAuth()

@@ -1,10 +1,10 @@
 import { createContext, useContext, useState } from "react";
-import { AuthProvProps, ContextProp, taskPropet } from "../Interfaces/Interfaces";
 import { imagePath, task } from "../components/func/func";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../app/store";
-import { addTask, editTask } from "../features/tasks/tasksSlice";
+import { RootState } from "../app/store/store";
+import { addTask, editTask } from "../app/feature/tasks/task.Slice";
+import { AuthProvProps, ContextProp, taskPropet } from "../Interfaces";
 
 export const AuthContext = createContext<ContextProp | undefined>(undefined)
 
@@ -39,12 +39,13 @@ const AuthProvider: React.FC<AuthProvProps> = ({ children }) => {
                 completed: false
             }
             dispatch(editTask(update))
-        };
-        dispatch(addTask({
-            ...newTask,
-            completed: false
-        }))
-        setNewTask(task)
+        } else {
+            dispatch(addTask({
+                ...newTask,
+                completed: false
+            }))
+            setNewTask(task)
+        }
         nav("/lists")
     }
     const RefreshPage = () => {

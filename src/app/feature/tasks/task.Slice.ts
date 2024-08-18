@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { taskProps } from "../../Interfaces/Interfaces";
-import { initialTask } from "../../components";
+import { initialTask } from "../../../components";
+import { taskProps } from "../../../Interfaces";
 
 export const taskSlice = createSlice({
     name: "tasks",

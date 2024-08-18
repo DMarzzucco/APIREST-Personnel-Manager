@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 export interface taskPropet {
     title: string;
@@ -27,7 +27,7 @@ export interface buttonImageProps {
     click: () => void;
     className: string;
 }
-export interface AuthProvProps { children: JSX.Element }
+export interface AuthProvProps { children: ReactNode }
 export interface ContextProp {
     currentIndex: number;
     Slide: (op: "prev" | "next") => void;

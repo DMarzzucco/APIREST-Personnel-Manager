@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../app/store";
+import { RootState } from "../../app/store/store";
 import { Link } from "react-router-dom";
-import { deleteTask } from "../../features/tasks/tasksSlice";
+import { deleteTask } from "../../app/feature/tasks/task.Slice";
 
 function listTasks() {
+    
     const tasks = useSelector((state: RootState) => state.tasks.tasks)
     console.log(tasks)
 
